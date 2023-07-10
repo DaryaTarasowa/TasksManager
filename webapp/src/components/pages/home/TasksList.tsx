@@ -56,7 +56,7 @@ export function TasksList() {
     return <>Error: {axiosError.message}</>;
   }
   return (
-    <div className="grow">
+    <div className="grow" data-ts="task-list">
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-3 p-2">
         <EmptyTask />
         {tasks?.map((item: ITaskInfo, index: number) => {
