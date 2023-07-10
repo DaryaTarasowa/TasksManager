@@ -1,0 +1,38 @@
+CREATE Task:
+==============
+curl -i \
+-d '{ "title":"Task 1", "description":"First task" }' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/v1/tasks
+
+curl -i \
+-d '{ "title":"Task 2", "description":"Second task", "priority":"LOW", "status":"IN_PROGRESS" }' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/v1/tasks
+
+
+curl -i \
+-d '{ "title":"Task 3", "description":"Third task", "priority":"HIGH", "status":"IN_PROGRESS", "dueDate":"2023-06-28T09:00:00" }' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/v1/tasks
+
+GET TASK BY ID:
+==============
+curl -i "http://localhost:8080/v1/tasks?id=1"
+
+FETCH ALL TASKS:
+==============
+curl -i "http://localhost:8080/v1/tasks?order=priority"
+
+UPDATE TASK:
+==============
+curl -i \
+-d '{ "title":"Task 1", "description":"First task (updated)", "priority": "HIGH", "status":"IN_PROGRESS" }' \
+-H "Content-Type: application/json" \
+-X PUT http://localhost:8080/v1/courses/1
+
+
+DELETE TASK:
+==============
+curl -i -X DELETE "http://localhost:8080/v1/tasks?id=1"
+
