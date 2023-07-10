@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { ITaskInfo } from "../../../interface/ITaskInfo";
@@ -17,24 +17,25 @@ export const EmptyTask: React.FC = () => {
     { refetchOnWindowFocus: false, enabled: false },
   );
 
-  const createEmptyTask = () => {
-    dispatch(sidebarActions.setOpen({ isOpen: true }));
-    refetch();
+  useEffect(()=>{
     if (data?.id) {
       dispatch(tasksActions.addTask({ taskDetail: data }));
       dispatch(selectionActions.setSelection({ taskId: data.id }));
       dispatch(selectionActions.updateSelectedTask({ taskDetail: data }));
+      dispatch(sidebarActions.setOpen({ isOpen: true }));
     } else if (isLoading) {
       dispatch(sidebarActions.setLoading({ isLoading: true }));
     } else {
       dispatch(sidebarActions.setError({ error: error as AxiosError }));
     }
-  };
+  },[data,error,isLoading,refetch])
+
+
   if (error) {
     return (
       <button
         className="bg-gray-100 text-gray-900 border rounded inset cursor-pointer"
-        onClick={() => createEmptyTask()}
+        onClick={() => refetch()}
       >
         <div className="text-center">
           <h1 className="text-base font-semibold leading-6">
@@ -49,7 +50,7 @@ export const EmptyTask: React.FC = () => {
     return (
       <button
         className="bg-gray-100 text-gray-900 border rounded inset cursor-pointer"
-        onClick={() => createEmptyTask()}
+        onClick={() => refetch()}
       >
         <div className="text-center">
           <h1 className="text-base font-semibold leading-6">Loading...</h1>
@@ -61,7 +62,7 @@ export const EmptyTask: React.FC = () => {
   return (
     <button
       className="bg-gray-100 text-gray-900 border rounded inset cursor-pointer"
-      onClick={() => createEmptyTask()}
+      onClick={() => refetch()}
     >
       <div className="text-center">
         <h1 className="text-base font-semibold leading-6">Add task</h1>

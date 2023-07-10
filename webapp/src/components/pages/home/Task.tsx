@@ -15,7 +15,7 @@ export const Task: React.FC<{
       ? "ring-indigo-500 border-indigo-500 border-2 ring-2"
       : "";
   return (
-    <button
+    <div
       className={
         "bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 border rounded shadow cursor-pointer" +
         showSelection
@@ -38,6 +38,6 @@ export const Task: React.FC<{
       <div className="flex justify-end">
         <button onClick={() => onDeleteClick()}>Delete</button>
       </div>
-    </button>
+    </div>
   );
 };

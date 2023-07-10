@@ -1,3 +1,0 @@
-const Configs = {
-  deploymentEnv: "stage",
-};

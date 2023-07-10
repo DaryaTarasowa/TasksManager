@@ -1,0 +1,5 @@
+task-repository-service/.gradle/
+task-repository-service/.idea/
+task-repository-service/build/
+webapp/.idea/
+webapp/node_modules/
