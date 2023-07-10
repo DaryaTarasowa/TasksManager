@@ -20,9 +20,8 @@ export const Task: React.FC<{
         "bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 border rounded shadow cursor-pointer" +
         showSelection
       }
-      onClick={() => onSelect()}
     >
-      <div className="flex items-start">
+      <div className="flex items-start" onClick={() => onSelect()}>
         <div className="h-12 flex-shrink-0 items-center justify-center sm:mx-0">
           <IconTask color={task.priority || "AVERAGE"} />
         </div>
