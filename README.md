@@ -5,6 +5,7 @@ This is a portfolio project, implemented usint React-Reduc and Kotlin
 ### Backend:
 ```
 cd task-repository-service
+chmod +x gradlew
 gw as
 ```
 ### Frontend
