@@ -1,7 +1,5 @@
 package com.craftworks.controller
 
-import com.craftworks.dto.Priority
-import com.craftworks.dto.Status
 import com.craftworks.dto.TaskDTO
 import com.craftworks.exceptions.TaskNotFoundException
 import com.craftworks.service.TaskService
@@ -9,7 +7,15 @@ import mu.KLogging
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
@@ -41,11 +47,9 @@ class TaskController(val taskService: TaskService) {
     @GetMapping
     fun get(
         @RequestParam id: Int?,
-        @RequestParam priority: Priority?,
-        @RequestParam status: Status?,
         @RequestParam order: String?,
     ): ResponseEntity<List<TaskDTO?>> {
-        val tasks = taskService.findTasks(id, priority, status, order)
+        val tasks = taskService.findTasks(id, order)
 
         return if (tasks != null) {
             ResponseEntity.ok(tasks)

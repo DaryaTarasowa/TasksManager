@@ -10,6 +10,7 @@ import com.craftworks.repository.TaskRepository
 import mu.KLogging
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -17,6 +18,12 @@ import java.time.LocalDateTime
 class TaskService(val taskRepository: TaskRepository) {
 
     companion object : KLogging()
+
+    @Scheduled(fixedRate = 3000)
+    fun addTask() {
+        println("Hello world")
+        this.createTask()
+    }
 
     fun createTask(): TaskDTO? {
         val taskEntity =
@@ -33,6 +40,7 @@ class TaskService(val taskRepository: TaskRepository) {
             )
 
         taskRepository.save(taskEntity)
+        println("task saved")
 
         return taskEntity.let {
             TaskDTO(
@@ -66,8 +74,6 @@ class TaskService(val taskRepository: TaskRepository) {
 
     fun findTasks(
         id: Int?,
-        priority: Priority?,
-        status: Status?,
         order: String?,
     ): List<TaskDTO>? {
         if (id != null) {
@@ -84,16 +90,10 @@ class TaskService(val taskRepository: TaskRepository) {
                     },
                 )
             } else {
-                // TODO empty
                 null
             }
         } else {
-            return if (priority == null && status == null) {
-                getAllTasksOrderedBy(order)
-            } else {
-                // TODO priority and status
-                getAllTasksOrderedBy(null)
-            }
+            return getAllTasksOrderedBy(order)
         }
     }
 
