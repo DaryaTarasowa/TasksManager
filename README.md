@@ -1,5 +1,5 @@
 # TaskManager
-This is a portfolio project, implemented usint React-Reduc and Kotlin
+This is a portfolio project, implemented usint React-Redux and Kotlin
 
 ## Installation
 ### Backend:
